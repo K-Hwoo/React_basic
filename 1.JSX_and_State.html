@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        // It's Hard way
+        /*
+        const txt = React.createElement(
+            "h3",
+            {
+                id: "count-span",
+                onMouseEnter: () => console.log("Mouse enter"),
+            },
+            "Hello I'm a span"
+        );
+        */
+        /* ReactDOM.render(txt, root); */
+
+        /*
+        const btn = React.createElement(
+            "button",
+            {
+                onClick: () => console.log("I'm clicked!"),
+            },
+            "Click me"
+        );
+        */
+
+        /*
+        const container = React.createElement("div", null, [txt, btn]);
+        */
+
+        // JSX - Babel이 필요합니다.
+        /*
+        const txt = (
+            <h3
+                id="count-span"
+                onMouseEnter={() => console.log("Mouse Enter!")}
+            >
+                Hello I'm a span
+            </h3>
+        );
+
+        const btn = (
+            <button
+                style={{ backgroundColor: "#bfff00" }}
+                onClick={() => console.log("I'm Clicked!")}
+            >
+                Click me
+            </button>
+        );
+        */
+
+        // Container 에 요소들 추가하기 위해 위의 요소들을 함수로 만들어야 합니다.
+        // 컴포넌트(함수)의 첫 문자는 반드시 대문자여야 합니다.
+        /*
+        function Txt() {
+            return (
+                <h3
+                    id="count-span"
+                    onMouseEnter={() => console.log("Mouse Enter!")}
+                >
+                    Hello I'm a span
+                </h3>
+            );
+        }
+
+        const Btn = () => (
+            <button
+                style={{ backgroundColor: "#bfff00" }}
+                onClick={() => console.log("I'm Clicked!")}
+            >
+                Click me
+            </button>
+        );
+
+        function Container() {
+            return (
+                <div>
+                    <Txt /> <Btn />
+                </div>
+            );
+        }
+        */
+
+        // State 사용
+        function App() {
+            const [counter, setCounter] = React.useState(0); // console.log -> [data, data를 바꿀 때 사용하는 함수]
+            // setCounter 가 자동으로 컴포넌트도 리렌더링 합니다.
+            const btnClick = () => {
+                // setCounter(counter + 1);
+                setCounter((current) => current + 1);
+            };
+
+            return (
+                <div>
+                    <h3>Total clicks: {counter}</h3>
+                    <button onClick={btnClick}>Click me</button>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, root);
+    </script>
+</html>
